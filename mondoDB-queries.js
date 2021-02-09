@@ -117,22 +117,16 @@ db.restaurants.find(
 //23 Escriu una consulta per trobar el restaurant_id, name i grades per a aquells restaurants on el 2n element de varietat de graus conté un grau de "A" i marcador 9 sobre un ISODate "2014-08-11T00:00:00Z"
 //24 Escriu una consulta per trobar el restaurant_id, name, adreça i ubicació geogràfica per a aquells restaurants on el segon element del array coord conté un valor quin és més que 42 i fins a 52
 //25 Escriu una consulta per organitzar el nom dels restaurants en ordre ascendent juntament amb totes les columnes
+db.restaurants.find().sort({"name":1});
 //26 Escriu una consulta per organitzar el nom dels restaurants en descendir juntament amb totes les columnes
+db.restaurants.find().sort({"name":-1});
 //27 Escriu una consulta a organitzar el nom de la cuisine en ordre ascendent i per el mateix barri de cuisine. Ordre descendint
+db.restaurants.find().sort({"cuisine":1,"borough" : -1,});
 //28 Escriu una consulta per saber tant si totes les direccions contenen el carrer o no
+db.restaurants.find({"address.street" : { $exists : true}});
 //29 Escriu una consulta quin seleccionarà tots el documents en la col·lecció de restaurants on el valor del camp coord és Double
 //30 Escriu una consulta quin seleccionarà el restaurant_id, name i grade per a aquells restaurants quins retorns 0 com a resta després de dividir el marcador per 7
 //31 Escriu una consulta per trobar el name de restaurant, borough, longitud i altitud i cuisine per a aquells restaurants que contenen 'mon' com tres lletres en algun lloc del seu name
 //32 Escriu una consulta per trobar el name de restaurant, borough, longitud i latitud i cuisine per a aquells restaurants que conteinen 'Mad' com primeres tres lletres del seu name
-db.restaurants.find(
-  { name : 
-    { $regex : /^Mad/i, } 
-  },
-      {
-        "name":1,
-        "borough":1,
-        "address.coord":1,
-        "cuisine" :1
-       }
-  );
+db.restaurants.find({ name : { $regex : /^Mad/i, } },{"name":1, "borough":1, "address.coord":1, "cuisine" :1 });
 
